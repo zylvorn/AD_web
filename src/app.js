@@ -1,14 +1,49 @@
 import React, { Component, Fragment } from 'react'
+import { Route, HashRouter, Switch, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { Provider } from 'react-redux'
 
-export class app extends Component {
+import store from './redux/store'
+
+import MainApp from './utils/app'
+import login from './modules/login'
+import error from './modules/error'
+
+export const app = () => {
+  return (
+    <Provider store={store}>
+      <HashRouter>
+        <Switch>
+          <Route path='/' component={Entry} />
+        </Switch>
+      </HashRouter>
+    </Provider>
+  )
+}
+
+export default app
+
+export class Entry extends Component {
   render() {
+    const { match } = this.props
+    const isAuth = localStorage.getItem('isAuth')
     return (
       <Fragment>
-        <h1 className='text-center'>ini header</h1>
-        <h4 className='test text-center'>ini css test</h4>
+        <Switch>
+          {!isAuth && <Route path='/login' component={login} />}
+          <Route path='/error' component={error} />
+          <Route path={`${match.url}`} component={MainApp} />
+          {isAuth ? (
+            <Redirect to='/error' />
+          ) : (
+            <Redirect to='/login' />
+          )}
+        </Switch>
       </Fragment>
     )
   }
 }
-
-export default app
+Entry.propTypes = {
+  location: PropTypes.any,
+  match: PropTypes.any
+}

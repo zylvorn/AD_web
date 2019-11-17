@@ -48,7 +48,7 @@ module.exports = {
       { from: './public/extras/manifest.json', to: 'extras' }
     ]),
     new SWPrecacheWebpackPlugin({
-      cacheId: 'webpack',
+      cacheId: 'ajarindong',
       filename: 'service-worker.js',
       navigateFallback: '/index.html',
       stripPrefix: BUILD_DIR,

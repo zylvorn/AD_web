@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 export class index extends Component {
   render() {
-    return <h1 className='text-center'>profile module</h1>
+    return <h1 className='text-center'>chat module</h1>
   }
 }
 
