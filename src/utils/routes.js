@@ -24,7 +24,7 @@ const Profile = Loadable({
 })
 
 export default [
-  { component: Dashboard, path: '/dashboard' },
+  { component: Dashboard, path: '/explore' },
   { component: Chats, path: '/chats' },
   { component: Order, path: '/order' },
   { component: Profile, path: '/profile' }

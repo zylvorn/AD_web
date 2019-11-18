@@ -9,13 +9,13 @@ import Navbar from './navbar'
 
 export class app extends Component {
   render() {
-    const { location } = this.props
+    const { location, history } = this.props
     const isAuth = localStorage.getItem('isAuth')
     return (
       <Fragment>
-        <Navbar />
+        <Navbar history={history} />
         <Container style={{ width: '80%' }}>
-          <div style={{ marginBottom: 50 }} />
+          <div style={{ marginBottom: 70 }} />
           <Switch>
             {Routes.filter(e =>
               isAuth ? e.path !== '/login' : e.path === false
@@ -29,7 +29,7 @@ export class app extends Component {
             {!isAuth && <Redirect to='/login' />}
             {(location.pathname === '/' ||
                             location.pathname === '/login') &&
-                            isAuth && <Redirect to='/dashboard' />}
+                            isAuth && <Redirect to='/explore' />}
             {isAuth ? (
               <Redirect to='/error' />
             ) : (
@@ -43,7 +43,8 @@ export class app extends Component {
 }
 app.propTypes = {
   match: PropTypes.any,
-  location: PropTypes.any
+  location: PropTypes.any,
+  history: PropTypes.object
 }
 const mapStateToProps = state => ({
   ...state

@@ -1,11 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import DataLoader from './data-loader'
 export class index extends Component {
-  render() {
-    return <h1 className='text-center'>order module</h1>
-  }
+    state = { isLoading: true }
+    componentDidMount() {
+      setTimeout(() => {
+        this.setState({ isLoading: false })
+      }, 4000)
+    }
+    render() {
+      const { isLoading } = this.state
+      return (
+        <Fragment>
+          <DataLoader isLoading={isLoading} />
+          <h1 className='text-center'>order module</h1>
+        </Fragment>
+      )
+    }
 }
 
 const mapStateToProps = state => ({
